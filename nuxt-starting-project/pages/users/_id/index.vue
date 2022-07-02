@@ -1,5 +1,5 @@
-.<template>
-  <h1>The users page!</h1>
+<template>
+  <h1> A single user with ID {{ $route.params.id }} </h1>
 </template>
 
 <script>

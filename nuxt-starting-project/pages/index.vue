@@ -1,15 +1,6 @@
 <template>
   <section class="container">
-    <div>
-      <logo/>
-      <h1 class="title">
-        Playing around with Nuxt.js... again
-      </h1>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">Documentation</a>
-        <a href="https://github.com/nuxt/nuxt.js" target="_blank" class="button--grey">GitHub</a>
-      </div>
-    </div>
+    <nuxt-link to="/users">Users</nuxt-link>
   </section>
 </template>
 
