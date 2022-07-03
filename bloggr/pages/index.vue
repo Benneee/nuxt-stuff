@@ -40,10 +40,11 @@ export default {
 
 <style scoped>
   .intro {
-    height: 150px;
+    height: 300px;
     position: relative;
     padding: 30px;
     box-sizing: border-box;
+    background-image: url('~assets/images/main-page-background.jpg');
     background-position: center;
     background-size: cover;
   }
