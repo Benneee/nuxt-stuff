@@ -1,8 +1,8 @@
 {
-  "name": "nuxt-course",
+  "name": "nuxt-playground",
   "version": "1.0.0",
-  "description": "Nuxt.js course for Udemy",
-  "author": "Maximilian Schwarzmüller",
+  "description": "Nuxt.js playground for revision",
+  "author": "Benneee",
   "private": true,
   "scripts": {
     "dev": "nuxt",
