@@ -7,13 +7,7 @@
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue';
-
 export default {
-  components: {
-    Logo
-  },
-
   methods: {
     goToProductsPage() {
       this.$router.push("/products");
@@ -23,12 +17,4 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
 </style>
