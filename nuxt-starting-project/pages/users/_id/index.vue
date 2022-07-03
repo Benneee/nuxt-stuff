@@ -5,6 +5,8 @@
 <script>
 export default {
 
+  layout: 'users',
+
   // This validate method is run by nuxt just before rendering this page
   // It can be used to validate the route properties
   validate(data) {

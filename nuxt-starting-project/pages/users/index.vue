@@ -13,6 +13,8 @@ export default {
     }
   },
 
+  layout: 'users',
+
   methods: {
     onLoadUser() {
       this.$router.push(`/users/${this.userId}`)
