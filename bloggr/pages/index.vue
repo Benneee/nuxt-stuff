@@ -17,30 +17,40 @@ export default {
     PostList
   },
 
-  data() {
-    return {
-      loadedPosts: [
-        {
-        id: 1,
-        thumbnail:'https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg',
-        title:"Hello there!",
-        previewText:"This is my first post!",
-        },
-        {
-          id: 2,
+  asyncData(context, callback) {
+    setTimeout(() => {
+      callback(null, {
+        loadedPosts: [
+          {
+          id: 1,
           thumbnail:'https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg',
-          title:"Hello again now!",
-          previewText:"This is my second post!",
-        },
-        {
-          id: 3,
-          thumbnail:'https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg',
-          title:"Hello for the third time!",
-          previewText:"This is my third post!"
-        }
-      ]
-    }
-  }
+          title:"Hello there!",
+          previewText:"This is my first post!",
+          },
+          {
+            id: 2,
+            thumbnail:'https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg',
+            title:"Hello again now!",
+            previewText:"This is my second post!",
+          },
+          {
+            id: 3,
+            thumbnail:'https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg',
+            title:"Hello for the third time!",
+            previewText:"This is my third post!"
+          }
+        ]
+      })
+    }, 1500)
+  },
+
+  // data() {
+  //   return {
+  //     loadedPosts: []
+  //   }
+  // },
+
+  created() {}
 }
 </script>
 
