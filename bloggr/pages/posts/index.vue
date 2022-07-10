@@ -13,7 +13,9 @@ export default {
   },
 
   asyncData(context, callback) {
+    // console.log("context: ", context);
     setTimeout(() => {
+      // callback(new Error(), {
       callback(null, {
         loadedPosts: [
             {

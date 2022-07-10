@@ -1,12 +1,12 @@
 <template>
   <div class="single-post-page">
     <section class="post">
-      <h1 class="post-title">Title of Post</h1>
+      <h1 class="post-title"> {{ loadedPost.title }} </h1>
       <div class="post-details">
-        <div class="post-detail">Last updated on XXX</div>
-        <div class="post-detail">Written by NAME</div>
+        <div class="post-detail">Last updated on {{ loadedPost.updatedDate }}</div>
+        <div class="post-detail">Written by {{ loadedPost.author }}</div>
       </div>
-      <p class="post-content">Content of the post</p>
+      <p class="post-content">{{ loadedPost.content }}</p>
     </section>
     <section class="post-feedback">
       <p>Let me know what you think about the post, send a mail to <a href="mailto:feedback@bloggr.com">Feedback</a></p>
@@ -16,6 +16,21 @@
 
 <script>
 export default {
+  asyncData(context, callback) {
+    setTimeout(() => {
+      callback(null, {
+        loadedPost: {
+              id: 2,
+              thumbnail:'https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg',
+              title:`Hello again now! PostID: ${context.params.id}`,
+              previewText:"This is my second post!",
+              author: 'Benneee',
+              updatedDate: new Date(),
+              content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat pariatur ducimus officiis dolor eveniet voluptate?'
+        },
+      })
+    }, 1000)
+  }
 
 }
 </script>
