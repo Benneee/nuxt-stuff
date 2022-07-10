@@ -12,32 +12,38 @@ export default {
     PostList
   },
 
-  asyncData(context, callback) {
-    // console.log("context: ", context);
-    setTimeout(() => {
-      // callback(new Error(), {
-      callback(null, {
-        loadedPosts: [
-            {
-            id: 1,
-            thumbnail:'https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg',
-            title:"Hello there!",
-            previewText:"This is my first post!",
-            },
-            {
-              id: 2,
+  asyncData(context) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({
+          loadedPosts: [
+              {
+              id: 1,
               thumbnail:'https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg',
-              title:"Hello again now!",
-              previewText:"This is my second post!",
-            },
-            {
-              id: 3,
-              thumbnail:'https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg',
-              title:"Hello for the third time!",
-              previewText:"This is my third post!"
-            }
-        ]
-      })
+              title:"Hello there!",
+              previewText:"This is my first post!",
+              },
+              {
+                id: 2,
+                thumbnail:'https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg',
+                title:"Hello again now!",
+                previewText:"This is my second post!",
+              },
+              {
+                id: 3,
+                thumbnail:'https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg',
+                title:"Hello for the third time!",
+                previewText:"This is my third post!"
+              }
+          ]
+        })
+      }, 1000)
+    })
+    .then((data) => {
+      return data
+    })
+    .catch(e => {
+      context.error(new Error())
     })
   }
 }
