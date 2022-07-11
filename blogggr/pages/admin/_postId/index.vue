@@ -1,7 +1,7 @@
 <template>
   <div class="admin-post-page">
     <section class="update-form">
-      <AdminPostForm :post="loadedPost" />
+      <AdminPostForm :post="loadedPost" @submit="updatePost" />
     </section>
   </div>
 </template>
@@ -25,6 +25,16 @@ export default {
         }
       })
       .catch(error => context.error(error))
+  },
+
+  methods: {
+    updatePost(postData) {
+      axios.put(`https://blogggr-1ddbc-default-rtdb.firebaseio.com/posts/${this.$route.params.postId}.json`, postData)
+        .then(res => {
+          this.$router.push("/admin")
+        })
+        .catch(error => context.error(error))
+    }
   }
 }
 </script>

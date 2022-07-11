@@ -60,7 +60,6 @@ export default {
 
   methods: {
     onSave() {
-      console.log("I dey here!", this.editedPost);
       this.$emit('submit', this.editedPost);
     },
 
