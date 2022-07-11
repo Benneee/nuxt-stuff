@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import PostList from "../../components/Posts/PostList.vue";
 
 export default {
@@ -45,6 +46,18 @@ export default {
     .catch(e => {
       context.error(new Error())
     })
+  },
+
+  created() {
+    this.createNewPosts();
+  },
+
+  methods: {
+    ...mapActions(['setPosts']),
+
+    createNewPosts() {
+      this.setPosts(this.loadedPosts);
+    }
   }
 }
 </script>
