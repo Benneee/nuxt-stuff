@@ -23,7 +23,9 @@ export default {
     onSubmitted(postData) {
       axios.post("https://blogggr-1ddbc-default-rtdb.firebaseio.com/posts.json", {
         ...postData, updatedDate: new Date()})
-      .then(result => console.log("result: ", result))
+      .then(res => {
+          this.$router.push("/admin")
+        })
       .catch(error => console.error("error: ", error))
     }
 
