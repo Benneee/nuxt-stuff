@@ -21,7 +21,8 @@ export default {
 
   methods: {
     onSubmitted(postData) {
-      axios.post("https://blogggr-1ddbc-default-rtdb.firebaseio.com/posts.json", postData)
+      axios.post("https://blogggr-1ddbc-default-rtdb.firebaseio.com/posts.json", {
+        ...postData, updatedDate: new Date()})
       .then(result => console.log("result: ", result))
       .catch(error => console.error("error: ", error))
     }

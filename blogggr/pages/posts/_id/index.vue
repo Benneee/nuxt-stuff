@@ -15,21 +15,18 @@
 </template>
 
 <script>
+import axios from 'axios';
+import { mapActions } from 'vuex';
+
 export default {
-  asyncData(context, callback) {
-    setTimeout(() => {
-      callback(null, {
-        loadedPost: {
-              id: 2,
-              thumbnail:'https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg',
-              title:`Hello again now! PostID: ${context.params.id}`,
-              previewText:"This is my second post!",
-              author: 'Benneee',
-              updatedDate: new Date(),
-              content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat pariatur ducimus officiis dolor eveniet voluptate?'
-        },
+  asyncData(context) {
+    return axios.get(`https://blogggr-1ddbc-default-rtdb.firebaseio.com/posts/${context.params.id}.json`)
+      .then(resp => {
+        return {
+          loadedPost: resp.data
+        }
       })
-    }, 1000)
+      .catch(error => context.error(error))
   }
 
 }
