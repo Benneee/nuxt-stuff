@@ -1,11 +1,11 @@
 <template>
   <div class="posts-page">
-    <PostList :posts="loadedPosts"/>
+    <PostList :posts="allPosts"/>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
 import PostList from "../../components/Posts/PostList.vue";
 
 export default {
@@ -13,7 +13,7 @@ export default {
     PostList
   },
 
-  asyncData(context) {
+  fetch(context) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve({
@@ -41,22 +41,18 @@ export default {
       }, 1000)
     })
     .then((data) => {
-      return data
+      context.store.commit('setPosts', data.loadedPosts)
     })
     .catch(e => {
       context.error(new Error())
     })
   },
 
-  created() {
-    this.createNewPosts();
-  },
+  computed: {
+    ...mapGetters(['loadedPosts']),
 
-  methods: {
-    ...mapActions(['setPosts']),
-
-    createNewPosts() {
-      this.setPosts(this.loadedPosts);
+    allPosts() {
+      return this.loadedPosts;
     }
   }
 }
