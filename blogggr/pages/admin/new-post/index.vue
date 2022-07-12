@@ -1,13 +1,13 @@
 <template>
   <div class="admin-new-post-page">
     <section class="new-post-form">
-      <AdminPostForm @submit="onSubmitted "/>
+      <AdminPostForm @submit="onSubmitted"/>
     </section>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import { mapActions } from "vuex";
 import AdminPostForm from "@/components/Admin/AdminPostForm.vue";
 
 export default {
@@ -20,13 +20,11 @@ export default {
   },
 
   methods: {
-    onSubmitted(postData) {
-      axios.post("https://blogggr-1ddbc-default-rtdb.firebaseio.com/posts.json", {
-        ...postData, updatedDate: new Date()})
-      .then(res => {
-          this.$router.push("/admin")
-        })
-      .catch(error => console.error("error: ", error))
+    ...mapActions(['addPost']),
+
+    async onSubmitted(postData) {
+      await this.addPost(postData)
+        .then(() => this.$router.push("/admin"));
     }
 
   }

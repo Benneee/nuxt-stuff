@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import axios from "axios";
 import AdminPostForm from "@/components/Admin/AdminPostForm.vue";
 
@@ -17,23 +18,22 @@ export default {
     AdminPostForm
   },
 
-  asyncData(context) {
+  async asyncData(context) {
     return axios.get(`https://blogggr-1ddbc-default-rtdb.firebaseio.com/posts/${context.params.postId}.json`)
       .then(resp => {
         return {
-          loadedPost: resp.data
+          loadedPost: { ...resp.data, id: context.params.postId }
         }
       })
       .catch(error => context.error(error))
   },
 
   methods: {
-    updatePost(postData) {
-      axios.put(`https://blogggr-1ddbc-default-rtdb.firebaseio.com/posts/${this.$route.params.postId}.json`, postData)
-        .then(res => {
-          this.$router.push("/admin")
-        })
-        .catch(error => context.error(error))
+    ...mapActions(['editPost']),
+
+    async updatePost(postData) {
+      await this.editPost(postData)
+        .then(() => this.$router.push('/admin'))
     }
   }
 }
