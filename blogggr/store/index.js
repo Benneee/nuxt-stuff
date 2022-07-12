@@ -28,7 +28,7 @@ export const mutations = {
 export const actions = {
   // This fetches the data once at the start of the application and can be used app-wide
   async nuxtServerInit(vuexContext, context) {
-    return axios.get("https://blogggr-1ddbc-default-rtdb.firebaseio.com/posts.json")
+    return axios.get(`${process.env.baseUrl}/posts.json`)
       .then(resp => {
         const postsArray = [];
         for (const key in resp.data) {
@@ -46,7 +46,7 @@ export const actions = {
 
   async addPost(context, post) {
     const createdPost = { ...post, updatedDate: new Date() }
-    return axios.post("https://blogggr-1ddbc-default-rtdb.firebaseio.com/posts.json", createdPost)
+    return axios.post(`${process.env.baseUrl}/posts.json`, createdPost)
     .then(res => {
         context.commit('addPost', { ...createdPost, id: res.data.name })
     })
@@ -54,7 +54,7 @@ export const actions = {
   },
 
   async editPost(context, editedPost) {
-    return axios.put(`https://blogggr-1ddbc-default-rtdb.firebaseio.com/posts/${editedPost.id}.json`, editedPost)
+    return axios.put(`${process.env.baseUrl}/posts/${editedPost.id}.json`, editedPost)
     .then(() => {
       context.commit('editPost', editedPost)
     })

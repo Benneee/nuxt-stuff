@@ -22,7 +22,11 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#3B8070' },
+  loading: { color: '#3B8070', height: '4px', duration: 5000 },
+  loadingIndicator: {
+    name: 'circle',
+    color: 'fa923f'
+  },
 
   /*
   ** Global CSS
@@ -53,5 +57,9 @@ module.exports = {
     extend(config, ctx) {
 
     }
+  },
+
+  env: {
+    baseUrl: process.env.BASE_URL || 'https://blogggr-1ddbc-default-rtdb.firebaseio.com/'
   }
 }
