@@ -61,5 +61,10 @@ module.exports = {
 
   env: {
     baseUrl: process.env.BASE_URL || 'https://blogggr-1ddbc-default-rtdb.firebaseio.com/'
+  },
+
+  transition: {
+    name: 'fade',
+    mode: 'out-in'
   }
 }
