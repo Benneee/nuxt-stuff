@@ -15,14 +15,12 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   asyncData(context) {
-    return axios.get(`https://blogggr-1ddbc-default-rtdb.firebaseio.com/posts/${context.params.id}.json`)
-      .then(resp => {
+    return context.app.$axios.$get(`/posts/${context.params.id}.json`)
+      .then(data => {
         return {
-          loadedPost: resp.data
+          loadedPost: data
         }
       })
       .catch(error => context.error(error))
