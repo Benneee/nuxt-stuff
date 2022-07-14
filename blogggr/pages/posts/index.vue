@@ -6,13 +6,8 @@
 
 <script>
 import { mapGetters } from "vuex";
-import PostList from "../../components/Posts/PostList.vue";
 
 export default {
-  components: {
-    PostList
-  },
-
   computed: {
     ...mapGetters(['loadedPosts']),
 
