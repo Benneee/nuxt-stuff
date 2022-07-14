@@ -8,7 +8,6 @@
 
 <script>
 import { mapActions } from "vuex";
-import axios from "axios";
 import AdminPostForm from "@/components/Admin/AdminPostForm.vue";
 
 export default {
@@ -19,10 +18,10 @@ export default {
   },
 
   async asyncData(context) {
-    return axios.get(`${process.env.baseUrl}/posts/${context.params.postId}.json`)
-      .then(resp => {
+    return context.app.$axios.$get(`/posts/${context.params.postId}.json`)
+      .then(data => {
         return {
-          loadedPost: { ...resp.data, id: context.params.postId }
+          loadedPost: { ...data, id: context.params.postId }
         }
       })
       .catch(error => context.error(error))
