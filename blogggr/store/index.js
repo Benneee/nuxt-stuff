@@ -49,7 +49,7 @@ export const actions = {
 
   async addPost(context, post) {
     const createdPost = { ...post, updatedDate: new Date() }
-    return this.$axios.$post(`/posts.json`, createdPost)
+    return this.$axios.$post(`/posts.json?auth=${context.state.token}`, createdPost)
     .then(data => {
         context.commit('addPost', { ...createdPost, id: data.name })
     })
@@ -57,7 +57,7 @@ export const actions = {
   },
 
   async editPost(context, editedPost) {
-    return this.$axios.$put(`${process.env.baseUrl}/posts/${editedPost.id}.json`, editedPost)
+    return this.$axios.$put(`${process.env.baseUrl}/posts/${editedPost.id}.json?auth=${context.state.token}`, editedPost)
     .then(() => {
       context.commit('editPost', editedPost)
     })
