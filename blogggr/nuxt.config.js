@@ -68,7 +68,8 @@ module.exports = {
   },
 
   env: {
-    baseUrl: process.env.BASE_URL || 'https://blogggr-1ddbc-default-rtdb.firebaseio.com/'
+    baseUrl: process.env.BASE_URL || 'https://blogggr-1ddbc-default-rtdb.firebaseio.com/',
+    fbAPIKey: 'AIzaSyDc8ObnaMeNzidXiqjM9KdzhpZVxoh5flY'
   },
 
   transition: {
