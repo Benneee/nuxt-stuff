@@ -1,5 +1,6 @@
 export const state = () => ({
-  loadedPosts: []
+  loadedPosts: [],
+  token: null
 })
 
 export const getters = {
@@ -20,6 +21,10 @@ export const mutations = {
   editPost(state, editedPost) {
     const postIndex = state.loadedPosts.findIndex(post => post.id === editedPost.id)
     state.loadedPosts[postIndex] = editedPost
+  },
+
+  setToken(state, token) {
+    state.token = token
   }
 }
 
@@ -57,5 +62,26 @@ export const actions = {
       context.commit('editPost', editedPost)
     })
     .catch(error => context.error(error))
+  },
+
+  async authenticateUser(context, authData) {
+    let authUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.fbAPIKey}`;
+    if (!authData.isLogin) {
+      authUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.fbAPIKey}`
+    }
+    return this.$axios.$post(
+      authUrl,
+      {
+        email: authData.email,
+        password: authData.password,
+        returnSecureToken: true
+      }
+    )
+    .then(result => {
+      // console.log("result: ", result);
+      const { idToken } = result;
+      context.commit("setToken", idToken)
+    })
+    .catch( error => console.log("error: ", error))
   }
 }
