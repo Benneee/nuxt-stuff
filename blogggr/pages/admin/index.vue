@@ -20,7 +20,7 @@ import AppButton from '@/components/UI/AppButton.vue';
 export default {
   layout: 'admin',
 
-  middleware: 'auth',
+  middleware: ['checkAuth', 'auth'],
 
   components: {
     PostList,
