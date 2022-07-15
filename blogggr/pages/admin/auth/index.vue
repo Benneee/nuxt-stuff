@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import  { mapActions } from 'vuex';
+
 export default {
   name: 'AdminAuthPage',
   layout: 'admin',
@@ -29,25 +31,19 @@ export default {
   },
 
   methods: {
-    onSubmit() {
-      let authUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.fbAPIKey}`
-      if (!this.isLogin) {
-        authUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.fbAPIKey}`
-      }
-      this.doAuth(authUrl)
-    },
+    ...mapActions(['authenticateUser']),
 
-    doAuth(url) {
-        this.$axios.$post(
-          url,
-          {
-            email: this.email,
-            password: this.password,
-            returnSecureToken: true
-          }
-        )
-        .then(result => console.log("result: ", result))
-        .catch( error => console.log("error: ", error))
+    onSubmit() {
+      const data = {
+        isLogin: this.isLogin,
+        email: this.email,
+        password: this.password
+      }
+
+      this.authenticateUser(data)
+        .then(() => {
+          this.$router.push('/admin')
+        })
     }
   }
 }
