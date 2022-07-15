@@ -29,6 +29,10 @@ export const mutations = {
 
   setToken(state, token) {
     state.token = token
+  },
+
+  clearToken(state) {
+    state.token = null
   }
 }
 
@@ -83,9 +87,16 @@ export const actions = {
     )
     .then(result => {
       // console.log("result: ", result);
-      const { idToken } = result;
-      context.commit("setToken", idToken)
+      const { idToken, expiresIn } = result;
+      context.commit("setToken", idToken);
+      context.dispatch('setLogoutTimer', expiresIn * 1000)
     })
     .catch( error => console.log("error: ", error))
+  },
+
+  setLogoutTimer(context, duration) {
+    setTimeout(() => {
+      context.commit('clearToken')
+    }, duration)
   }
 }
