@@ -4,6 +4,9 @@
       <AppButton @click="$router.push('/admin/new-post')">
         Create Post
       </AppButton>
+      <AppButton style="margin-left: 10px;" @click="onLogout">
+        Log out
+      </AppButton>
     </section>
     <section class="existing-posts">
       <h1>Existing Posts</h1>
@@ -13,7 +16,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import PostList from '@/components/Posts/PostList.vue';
 import AppButton from '@/components/UI/AppButton.vue';
 
@@ -32,6 +35,14 @@ export default {
 
     allPosts() {
       return this.loadedPosts;
+    }
+  },
+
+  methods: {
+    ...mapActions(['logout']),
+    onLogout() {
+      this.logout();
+      this.$router.push("/admin/auth")
     }
   }
 }
