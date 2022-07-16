@@ -131,10 +131,18 @@ export const actions = {
     }
 
     if (new Date().getTime() > +expirationDate || !token) {
-      context.commit('clearToken');
+      context.dispatch('logout')
       return;
     }
     // context.dispatch('setLogoutTimer', +expirationDate - new Date().getTime())
     context.commit('setToken', token)
+  },
+
+  logout(context) {
+    context.commit('clearToken');
+    Cookie.remove('jwt');
+    Cookie.remove('expirationDate');
+    localStorage.removeItem('token');
+    localStorage.removeItem('tokenExpiration');
   }
 }
