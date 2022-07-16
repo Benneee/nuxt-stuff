@@ -92,20 +92,20 @@ export const actions = {
       const { idToken, expiresIn } = result;
       context.commit("setToken", idToken);
       localStorage.setItem('token', idToken);
-      localStorage.setItem('tokenExpiration', new Date().getTime() + expiresIn * 1000);
+      localStorage.setItem('tokenExpiration', new Date().getTime() + Number.parseInt(expiresIn) * 1000);
 
       Cookie.set('jwt', idToken);
-      Cookie.set('expirationDate', new Date().getTime() + expiresIn * 1000);
-      context.dispatch('setLogoutTimer', expiresIn * 1000)
+      Cookie.set('expirationDate', new Date().getTime() + Number.parseInt(expiresIn) * 1000);
+      // context.dispatch('setLogoutTimer', expiresIn * 1000)
     })
     .catch( error => console.log("error: ", error))
   },
 
-  setLogoutTimer(context, duration) {
-    setTimeout(() => {
-      context.commit('clearToken')
-    }, duration)
-  },
+  // setLogoutTimer(context, duration) {
+  //   setTimeout(() => {
+  //     context.commit('clearToken')
+  //   }, duration)
+  // },
 
   initAuth(context, req) {
     let token;
@@ -128,12 +128,13 @@ export const actions = {
     } else {
       token = localStorage.getItem('token');
       expirationDate = localStorage.getItem('tokenExpiration');
-
-      if (new Date().getTime() > +expirationDate || !token) {
-        return;
-      }
-      context.dispatch('setLogoutTimer', +expirationDate - new Date().getTime())
-      context.commit('setToken', token)
     }
+
+    if (new Date().getTime() > +expirationDate || !token) {
+      context.commit('clearToken');
+      return;
+    }
+    // context.dispatch('setLogoutTimer', +expirationDate - new Date().getTime())
+    context.commit('setToken', token)
   }
 }
