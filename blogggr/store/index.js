@@ -142,7 +142,9 @@ export const actions = {
     context.commit('clearToken');
     Cookie.remove('jwt');
     Cookie.remove('expirationDate');
-    localStorage.removeItem('token');
-    localStorage.removeItem('tokenExpiration');
+    if (process.client) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('tokenExpiration');
+    }
   }
 }
