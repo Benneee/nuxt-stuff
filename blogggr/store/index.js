@@ -96,16 +96,9 @@ export const actions = {
 
       Cookie.set('jwt', idToken);
       Cookie.set('expirationDate', new Date().getTime() + Number.parseInt(expiresIn) * 1000);
-      // context.dispatch('setLogoutTimer', expiresIn * 1000)
     })
     .catch( error => console.log("error: ", error))
   },
-
-  // setLogoutTimer(context, duration) {
-  //   setTimeout(() => {
-  //     context.commit('clearToken')
-  //   }, duration)
-  // },
 
   initAuth(context, req) {
     let token;
@@ -134,7 +127,6 @@ export const actions = {
       context.dispatch('logout')
       return;
     }
-    // context.dispatch('setLogoutTimer', +expirationDate - new Date().getTime())
     context.commit('setToken', token)
   },
 
