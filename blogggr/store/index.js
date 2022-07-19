@@ -96,6 +96,11 @@ export const actions = {
 
       Cookie.set('jwt', idToken);
       Cookie.set('expirationDate', new Date().getTime() + Number.parseInt(expiresIn) * 1000);
+
+      // Testing our server middleware, we want to send a request to our custom "track-data" API
+      return this.$axios.post('http://localhost:3000/api/track-data', {
+        data: 'User authenticated'
+      })
     })
     .catch( error => console.log("error: ", error))
   },
