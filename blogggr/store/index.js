@@ -123,7 +123,7 @@ export const actions = {
       .find(c => c.trim().startsWith('expirationDate='))
       .split('=')[1]
 
-    } else {
+    } else if (process.client) {
       token = localStorage.getItem('token');
       expirationDate = localStorage.getItem('tokenExpiration');
     }
