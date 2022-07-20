@@ -1,5 +1,6 @@
 const pkg = require('./package')
 const bodyParser = require('body-parser')
+const axios = require('axios')
 
 module.exports = {
   mode: 'universal',
@@ -85,5 +86,22 @@ module.exports = {
   serverMiddleware: [
     bodyParser.json(),
     '~/api'
-  ]
+  ],
+
+  generate: {
+    routes: function() {
+      // This fetches all the posts in the BE so that a post's content can be dynamically rendered when hosting statically
+      // axios.get('https://blogggr-1ddbc-default-rtdb.firebaseio.com/posts.json')
+      // .then(res => {
+      //   const routes = []
+      //   for (const key in res.data) {
+      //     routes.push(`/posts/${key}`)
+      //   }
+      //   return routes
+      // })
+      return [
+        '/posts/-N6vU1B7Sils93lJPbsO'
+      ]
+    }
+  }
 }
